@@ -1,0 +1,59 @@
+CREATE DATABASE DataWarehouse;
+GO
+
+USE DataWarehouse;
+GO
+
+CREATE TABLE dimDate (
+    DateKey INT PRIMARY KEY,      
+    FullDate DATE NOT NULL,
+    Day INT,
+    Month INT,
+    Year INT,
+    Quarter INT,
+    DayOfWeek VARCHAR(10),
+    IsWeekend BIT
+);
+GO
+
+CREATE TABLE dimCar (
+    CarKey INT PRIMARY KEY IDENTITY(1,1),
+    CarID INT,                        
+    Brand VARCHAR(50),
+    Model VARCHAR(50),
+    EngineType VARCHAR(50),
+    Price DECIMAL(18,2)
+);
+GO
+
+CREATE TABLE dimCustomer (
+    CustomerKey INT PRIMARY KEY IDENTITY(1,1),
+    CustomerID INT,                   
+    FullName VARCHAR(100),
+    PhoneNumber VARCHAR(15),
+    Email VARCHAR(100),
+    City VARCHAR(50),
+    StartDate DATE,                   
+    EndDate DATE NULL,                
+    IsCurrent BIT                    
+);
+GO
+
+CREATE TABLE dimWorker (
+    WorkerKey INT PRIMARY KEY IDENTITY(1,1),
+    WorkerID INT,                    
+    FullName VARCHAR(100),
+    CarhouseName VARCHAR(100)
+);
+GO
+
+CREATE TABLE FactSales (
+    SalesKey INT PRIMARY KEY IDENTITY(1,1),
+    DateKey INT FOREIGN KEY REFERENCES dimDate(DateKey),
+    CarKey INT FOREIGN KEY REFERENCES dimCar(CarKey),
+    CustomerKey INT FOREIGN KEY REFERENCES dimCustomer(CustomerKey),
+    WorkerKey INT FOREIGN KEY REFERENCES dimWorker(WorkerKey),
+    SaleAmount DECIMAL(18,2),
+    Quantity INT
+);
+GO

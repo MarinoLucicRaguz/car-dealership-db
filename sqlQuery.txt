@@ -1,0 +1,26 @@
+SELECT 
+    d.Year,
+    SUM(f.SaleAmount) AS TotalSales,
+    COUNT(f.SalesKey) AS NumberOfSales
+FROM 
+    FactSales f
+JOIN 
+    dimDate d ON f.DateKey = d.DateKey
+GROUP BY 
+    d.Year
+ORDER BY 
+    d.Year;
+
+
+SELECT 
+    c.Brand,
+    AVG(f.SaleAmount) AS AverageSaleAmount,
+    COUNT(f.SalesKey) AS NumberOfSales
+FROM 
+    FactSales f
+JOIN 
+    dimCar c ON f.CarKey = c.CarKey
+GROUP BY 
+    c.Brand
+ORDER BY 
+    c.Brand;

@@ -1,0 +1,33 @@
+UPDATE Customer
+SET FullName = 'Ana Horvatic', 
+    PhoneNumber = '0921111111',
+    Email = 'ana.horvatic@noviemail.com'
+WHERE CustomerID = 1;
+
+
+UPDATE Customer
+SET FullName = 'Marko Kovacevic', 
+    PhoneNumber = '0922222222',
+    Email = 'marko.kovacevic@noviemail.com'
+WHERE CustomerID = 2;
+
+
+UPDATE Customer
+SET FullName = 'Ivana Petrović Nova', 
+    PhoneNumber = '0923333333',
+    Email = 'ivana.novapetrovic@example.com'
+WHERE CustomerID = 3;
+
+
+UPDATE Customer
+SET FullName = 'Petar Novak Updated', 
+    PhoneNumber = '0924444444',
+    Email = 'petar.novak.updated@example.com'
+WHERE CustomerID = 4;
+
+
+UPDATE Customer
+SET FullName = 'Lucija Radic Nova', 
+    PhoneNumber = '0925555555',
+    Email = 'lucija.radic.nova@example.com'
+WHERE CustomerID = 5;

@@ -1,0 +1,26 @@
+IF NOT EXISTS (SELECT 1 FROM dimDate)
+BEGIN
+    DECLARE @StartDate DATE = '2000-01-01';
+    DECLARE @EndDate DATE = '2030-12-31';
+
+    WHILE @StartDate <= @EndDate
+    BEGIN
+        INSERT INTO dimDate (DateKey, FullDate, Day, Month, Year, Quarter, DayOfWeek, IsWeekend)
+        VALUES (
+            CONVERT(INT, CONVERT(VARCHAR(8), @StartDate, 112)),  -- format YYYYMMDD za DateKey
+            @StartDate,
+            DAY(@StartDate),
+            MONTH(@StartDate),
+            YEAR(@StartDate),
+            DATEPART(QUARTER, @StartDate),
+            DATENAME(WEEKDAY, @StartDate),
+            CASE WHEN DATENAME(WEEKDAY, @StartDate) IN ('Saturday', 'Sunday') THEN 1 ELSE 0 END
+        );
+        
+        SET @StartDate = DATEADD(DAY, 1, @StartDate);
+    END
+END
+ELSE
+BEGIN
+    PRINT 'dimDate već sadrži podatke. Punjenje nije potrebno.';
+END
